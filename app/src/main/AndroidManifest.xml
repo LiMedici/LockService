@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.administrator.lockservice">
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".SecondActivity"></activity>
+
+        <!-- 一像素大小的Activity -->
+        <activity
+            android:name=".SinglePixelActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation|keyboard"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:theme="@style/SingleActivityStyle"
+            android:windowSoftInputMode="stateHidden|stateUnchanged|adjustPan" />
+
+        <!-- 推送服务 -->
+        <service
+            android:name=".WorkService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="MinaService" />
+
+        <!-- 推送Inner服务 -->
+        <service
+            android:name=".WorkService$WorkInnerService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="MinaInnerService" />
+
+        <!-- 保活服务 -->
+        <service
+            android:name=".DefendService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="DefendService" />
+
+        <!-- 保活Inner服务 -->
+        <service
+            android:name=".DefendService$DefendInnerService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="DefendInnerService" />
+
+        <!-- 保活的广播注册 -->
+        <receiver
+            android:name=".RestartServiceReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="1000">
+            <intent-filter>
+                <action android:name="com.cnbi.ic9.mina.receiver.RestartServiceReceiver_MINA" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
